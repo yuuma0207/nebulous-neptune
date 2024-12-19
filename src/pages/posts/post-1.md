@@ -5,7 +5,7 @@ pubDate: 2024-12-17
 description: 'これは私の新しいAstroブログの最初の記事です。'
 author: 'yuuma'
 image:
-    url: 'https://docs.astro.build/assets/full-logo-light.png'
+    url: 'https://docs.astro.build/assets/full-logo-dark.png'
     alt: 'Astroのロゴ。'
 tags: ["astro", "ブログ", "公開学習"]
 ---

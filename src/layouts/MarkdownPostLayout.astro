@@ -7,5 +7,8 @@ const yyyymmdd = new Date(frontmatter.pubDate).toLocaleDateString('ja-JP');
     <title>{frontmatter.title}</title>
 </head>
 <h1>{frontmatter.title}</h1>
-<p>{frontmatter.author}: {yyyymmdd}</p>
+<p>投稿日：{yyyymmdd}</p>
+<p><em>{frontmatter.description}</em></p>
+<p>著者：{frontmatter.author}</p>
+<img src={frontmatter.image.url} width="300" alt={frontmatter.image.alt} />
 <slot />
