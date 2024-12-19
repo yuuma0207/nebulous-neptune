@@ -3,7 +3,7 @@ import type { Post } from '../../types/post.ts';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 export async function getStaticPaths() {
-    const matches = import.meta.glob<Post>("../pages/posts/*.md", { eager: true });
+    const matches = import.meta.glob<Post>("../posts/*.md", { eager: true });
     const allPosts = Object.values(matches) as Post[];
   return [
     { params: { tag: "astro" }, props: {posts: allPosts} },
@@ -17,7 +17,11 @@ export async function getStaticPaths() {
 
 const { tag } = Astro.params;
 const { posts } = Astro.props;
+const filteredPosts = posts.filter((post) => post.frontmatter.tags?.includes(tag));
 ---
 <BaseLayout pageTitle={tag}>
   <p>{tag}のタグが付いた記事</p>
+  <ul>
+    {filteredPosts.map((post) => <li><a href={post.url}>{post.frontmatter.title}</a></li>)}
+  </ul>
 </BaseLayout>

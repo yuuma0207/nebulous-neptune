@@ -10,6 +10,6 @@ export type Post = {
         pubDate: string;
         tags: string[];
     };
-    content: String;
+    content: string;
     url: string;
 }
