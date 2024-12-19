@@ -6,21 +6,21 @@ import BlogPost from '../../components/BlogPost.astro';
 export async function getStaticPaths() {
     const matches = import.meta.glob<Post>("../posts/*.md", { eager: true });
     const allPosts = Object.values(matches) as Post[];
-  return [
-    { params: { tag: "astro" }, props: {posts: allPosts} },
-    { params: { tag: "成功" }, props: {posts: allPosts} },
-    { params: { tag: "コミュニティ" }, props: {posts: allPosts} },
-    { params: { tag: "ブログ" }, props: {posts: allPosts} },
-    { params: { tag: "後退" }, props: {posts: allPosts} },
-    { params: { tag: "公開学習" }, props: {posts: allPosts} },
-  ];
+
+    const uniqueTags = [...new Set(allPosts.map((post) => post.frontmatter.tags).flat())];
+    return uniqueTags.map((tag) => {
+        const filteredPosts = allPosts.filter((post) => post.frontmatter.tags.includes(tag));
+        return {
+            params: { tag },
+            props: { posts: filteredPosts }
+        };
+    });
 }
 
 const { tag } = Astro.params;
 const { posts } = Astro.props;
-const filteredPosts = posts.filter((post) => post.frontmatter.tags?.includes(tag));
 ---
 <BaseLayout pageTitle={tag}>
     <p>{tag}のタグが付いた記事</p>
-    {filteredPosts.map((post) => <BlogPost url={post.url} title={post.frontmatter.title} description={post.frontmatter.description}></BlogPost>)}
+    {posts.map((post) => <BlogPost url={post.url} title={post.frontmatter.title} description={post.frontmatter.description}></BlogPost>)}
 </BaseLayout>
