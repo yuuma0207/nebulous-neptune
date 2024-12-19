@@ -2,15 +2,16 @@
 import type { Post } from "../types/post.ts";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import BlogPost from "../components/BlogPost.astro";
-const allPosts = await Object.values(
-    import.meta.glob<Post>("../pages/posts/*.md", { eager: true })
-) as Post[];
+const matches = import.meta.glob<Post>("../pages/posts/*.md", { eager: true });
+const allPosts = Object.values(matches) as Post[];
 const PageTitle = "私のAstro学習ブログ"
 ---
 
 <BaseLayout pageTitle={PageTitle}>
     <p>ここには、私がAstroを学んでいく旅の様子を投稿します。</p>
     <ul>
-        {allPosts.map((post) => <BlogPost url={post.url} title={post.frontmatter.title}></BlogPost>)}
+        {allPosts.map((post) => (
+            <BlogPost url={post.url} title={post.frontmatter.title} description={post.frontmatter.description}></BlogPost>
+        ))}
     </ul>
 </BaseLayout>
