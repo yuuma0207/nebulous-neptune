@@ -1,9 +1,11 @@
 ---
 const { frontmatter } = Astro.props;
+const yyyymmdd = new Date(frontmatter.pubDate).toLocaleDateString('ja-JP');
 ---
 <head>
     <meta charset="utf-8" />
+    <title>{frontmatter.title}</title>
 </head>
 <h1>{frontmatter.title}</h1>
-<p>{frontmatter.author}</p>
+<p>{frontmatter.author}: {yyyymmdd}</p>
 <slot />
