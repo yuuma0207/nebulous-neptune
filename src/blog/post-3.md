@@ -1,5 +1,4 @@
 ---
-layout: ../../layouts/MarkdownPostLayout.astro
 title: 私の3番目のブログ記事
 author: yuuma
 description: "上手くいかないことがありましたが、コミュニティに質問して助けてもらいました！"

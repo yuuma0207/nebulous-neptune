@@ -1,5 +1,4 @@
 ---
-layout: ../../layouts/MarkdownPostLayout.astro
 title: 私の4番目のブログ記事
 author: yuuma
 description: "この記事単独で表示されます！"
